@@ -1,8 +1,19 @@
 import styled from '@emotion/styled';
 
+const Screen = styled.div`
+  @media (min-width: 1024px) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    background-color: hsl(234, 29%, 20%);
+    width: 100vw;
+    height: 100vh;
+  }
+`;
+
 const Wrapper = styled.div`
   position: absolute;
-  z-index: 1;
   top: 0;
   left: 0;
   min-width: 375px;
@@ -10,6 +21,14 @@ const Wrapper = styled.div`
   height: 100vh;
   background-color: hsl(0, 0%, 100%);
   color: hsl(235, 18%, 26%);
+  @media (min-width: 1024px) {
+    width: fit-content;
+    height: unset;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    border-radius: 30px;
+  }
 `;
 
 const Card = styled.div`
@@ -18,8 +37,12 @@ const Card = styled.div`
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 18rem;
+  gap: 16rem;
   width: 42ch;
+  @media (min-width: 1024px) {
+    padding: 3rem;
+    gap: 2rem;
+  }
 `;
 
 const Content = styled.div`
@@ -73,19 +96,21 @@ type ModalProps = {
 
 export const Modal = ({ onClose }: ModalProps) => {
   return (
-    <Wrapper>
-      <Card>
-        <Content>
-          <Img src="/images/icon-success.svg" alt="icon-success" />
-          <Title>Thanks for subscribing!</Title>
-          <Text>
-            A confirmation email has been sent to
-            <strong> ash@loremcompany.com</strong>. Please open it and click the
-            button inside to confirm your subscription
-          </Text>
-        </Content>
-        <Button onClick={onClose}>Dismiss message</Button>
-      </Card>
-    </Wrapper>
+    <Screen>
+      <Wrapper>
+        <Card>
+          <Content>
+            <Img src="/images/icon-success.svg" alt="icon-success" />
+            <Title>Thanks for subscribing!</Title>
+            <Text>
+              A confirmation email has been sent to
+              <strong> ash@loremcompany.com</strong>. Please open it and click
+              the button inside to confirm your subscription
+            </Text>
+          </Content>
+          <Button onClick={onClose}>Dismiss message</Button>
+        </Card>
+      </Wrapper>
+    </Screen>
   );
 };

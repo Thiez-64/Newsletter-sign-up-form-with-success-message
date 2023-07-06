@@ -4,11 +4,29 @@ import { css } from '@emotion/react';
 import { Modal } from './Modal';
 import styled from '@emotion/styled';
 
+const Screen = styled.div`
+  @media (min-width: 1024px) {
+    background-color: hsl(234, 29%, 20%);
+    width: 100vw;
+    height: 100vh;
+  }
+`;
+
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   min-width: 375px;
+  max-height: 842px;
   @media (min-width: 1024px) {
+    flex-direction: row-reverse;
+    padding: 1.5rem;
+    background-color: hsl(0, 0%, 100%);
+    width: fit-content;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    border-radius: 35px;
   }
 `;
 
@@ -18,14 +36,22 @@ const Content = styled.div`
   flex-direction: column;
   gap: 2rem;
   margin: 0 auto;
-  padding-block: 2.5rem;
+  padding-block: 2rem;
   color: hsl(234, 29%, 20%);
+  @media (min-width: 1024px) {
+    width: fit-content;
+    margin-inline: 3rem;
+    padding-block: 3.6rem;
+  }
 `;
 
 const Title = styled.div`
   font-family: 'Roboto-Bold', sans-serif;
   font-size: 36px;
   font-weight: 700;
+  @media (min-width: 1024px) {
+    font-size: 52px;
+  }
 `;
 
 const Text = styled.div`
@@ -33,6 +59,9 @@ const Text = styled.div`
   font-size: 16px;
   width: 34ch;
   line-height: 1.6rem;
+  @media (min-width: 1024px) {
+    width: 46ch;
+  }
 `;
 
 const ListDots = styled.div`
@@ -40,6 +69,9 @@ const ListDots = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  @media (min-width: 1024px) {
+    width: unset;
+  }
 `;
 
 const Dot = styled.div`
@@ -55,7 +87,7 @@ const Dot = styled.div`
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
   color: hsl(234, 29%, 20%);
 `;
 
@@ -139,12 +171,13 @@ const App = () => {
       setValidation(true);
     }
   };
+  console.log('window', window);
   return (
-    <div>
+    <Screen>
       <Wrapper>
         <img
           src={
-            window.innerWidth === breakpoint
+            window.innerWidth > breakpoint
               ? '/images/illustration-sign-up-desktop.svg'
               : '/images/illustration-sign-up-mobile.svg'
           }
@@ -192,7 +225,7 @@ const App = () => {
           <Modal onClose={() => setModal(false)} />,
           document.getElementById('modal-root') as HTMLElement,
         )}
-    </div>
+    </Screen>
   );
 };
 
